@@ -4,7 +4,10 @@
   "description": "A command line helper package",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "bin": {
+    "lackey": "./bin/lackey.js"
   },
   "repository": {
     "type": "git",
