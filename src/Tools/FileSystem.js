@@ -1,5 +1,5 @@
-const FileExistsError = require('./Exceptions/FileExistsError.js')
-const FileNotFoundError = require('./Exceptions/FileNotFoundError.js')
+const FileExistsError = require('./Errors/FileExistsError.js')
+const FileNotFoundError = require('./Errors/FileNotFoundError.js')
 
 class FileSystem {
 
