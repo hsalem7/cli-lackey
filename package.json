@@ -1,5 +1,5 @@
 {
-  "name": "lackey",
+  "name": "cli-lackey",
   "version": "1.0.0",
   "description": "A command line helper package",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hassanalisalem/lackey.git"
+    "url": "git+https://github.com/hassanalisalem/cli-lackey.git"
   },
   "author": "Hassan Salem <h.salem7788@gmail.com>",
   "license": "ISC",
