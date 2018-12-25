@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hassanalisalem/lackey/issues"
   },
-  "homepage": "https://github.com/hassanalisalem/lackey#readme"
+  "homepage": "https://github.com/hassanalisalem/lackey#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
