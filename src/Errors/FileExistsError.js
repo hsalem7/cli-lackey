@@ -1,0 +1,1 @@
+class FileExistsError extends Error {}
