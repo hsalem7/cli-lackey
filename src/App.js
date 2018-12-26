@@ -38,6 +38,22 @@ class App {
             })
         }
     }
+
+    run () {
+        this.init()
+        this.commander.parse(process.argv);
+    }
+
+    static call (command, args, options) {
+        let input = new Input(command.args)
+        input.setArgs(args)
+        input.setOptions(options)
+        command.input = input
+        command.handle()
+    }
+
+
+
 }
 
 module.exports = App
