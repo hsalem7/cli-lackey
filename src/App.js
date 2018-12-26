@@ -1,4 +1,5 @@
 const program = require('commander');
+const Input = require('./../src/Tools/Input.js')
 
 class App {
     constructor (commander = null) {
@@ -28,6 +29,11 @@ class App {
             }
 
             appCommand.action((args, options) => {
+                let input = new Input(this.commands[command].args)
+                input.setArgs(args)
+                input.setOptions(options)
+
+                this.commands[command].input = input
                 this.commands[command].handle()
             })
         }
