@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/hassanalisalem/lackey#readme",
   "devDependencies": {
-    "colors": "^1.3.3",
     "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "colors": "^1.3.3",
+    "commander": "^2.19.0"
   }
 }
