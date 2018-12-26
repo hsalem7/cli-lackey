@@ -3,8 +3,12 @@ const Input = require('./../src/Tools/Input.js')
 
 class App {
     constructor (commander = null) {
-        this.commander = commander || program
+        this.setCommander(commander || program)
         this.commands = {}
+    }
+
+    setCommander (commander) {
+        this.commander = commander
     }
 
     register (command) {
