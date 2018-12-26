@@ -24,15 +24,15 @@ class Command {
     }
 
     info (...message) {
-        this.logger.info(...message)
+        this.logger.info(message)
     }
 
-    error (message) {
-        this.logger.error(...message)
+    error (...message) {
+        this.logger.error(message)
     }
 
-    warn (message) {
-        this.logger.warn(...message)
+    warn (...message) {
+        this.logger.warn(message)
     }
 }
 
