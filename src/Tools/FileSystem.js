@@ -33,7 +33,7 @@ class FileSystem {
         try {
             return fs.readFileSync(file, 'utf8')
         } catch (error) {
-            return null
+            return new Error(error)
         }
     }
 
