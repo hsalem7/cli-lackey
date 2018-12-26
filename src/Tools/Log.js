@@ -2,15 +2,15 @@ const colors = require('colors')
 
 class Log {
 
-    static error (...message) {
+    static error (message) {
         return this.message('error', message)
     }
 
-    static warn (...message) {
+    static warn (message) {
         return this.message('warn', message)
     }
 
-    static info (...message) {
+    static info (message) {
         return this.message('info', message)
     }
 
