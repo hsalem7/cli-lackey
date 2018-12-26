@@ -3,9 +3,7 @@ const Log = require('./../src/Tools/Log.js')
 class Command {
 
     constructor (logger = null) {
-        if(logger === null) {
-            this.logger = Log
-        }
+        this.logger = logger || Log
     }
 
     getSignature () {
