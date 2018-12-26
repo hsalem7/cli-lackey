@@ -15,4 +15,21 @@ class App {
             this.register(command)
         }
     }
+
+    buildArgs (command) {
+        return '[args...]'
+    }
+
+    init () {
+        for(let command in this.commands) {
+           let appCommand = this.commander.command(this.commands[command].name + ' ' + this.buildArgs(this.commands[command]))
+            for(let option of this.commands[command].options) {
+                appCommand.option('--' + option + ' <' + option + '>')
+            }
+
+            appCommand.action((args, options) => {
+                this.commands[command].handle()
+            })
+        }
+    }
 }
