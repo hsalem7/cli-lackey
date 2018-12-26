@@ -1,27 +1,27 @@
+const Log = require('./../src/Tools/Log.js')
+
 class Command {
 
-    constructor () {
-
+    constructor (logger = null) {
+        if(logger === null) {
+            this.logger = Log
+        }
     }
 
     getSignature () {
 
     }
 
-    info (message) {
-
+    info (...message) {
+        this.logger.info(...message)
     }
 
     error (message) {
-
+        this.logger.error(...message)
     }
 
     warn (message) {
-
-    }
-
-    output (text, color) {
-
+        this.logger.warn(...message)
     }
 }
 
