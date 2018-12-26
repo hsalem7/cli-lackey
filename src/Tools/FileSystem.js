@@ -1,4 +1,6 @@
 const fs = require('fs')
+const path = require('path')
+
 const FileExistsError = require('./../Errors/FileExistsError.js')
 const FileNotFoundError = require('./../Errors/FileNotFoundError.js')
 
@@ -8,8 +10,8 @@ class FileSystem {
         return fs.existsSync(file)
     }
 
-    static putContent (path, content, recursive = false) {
-        if(this.exists(path)) {
+    static putContent (file, content, recursive = false) {
+        if(this.exists(file)) {
             return new FileExistsError('File exists')
         }
 
@@ -18,7 +20,7 @@ class FileSystem {
                 this.createDirectories(file)
             }
 
-            fs.writeFileSync(path, content)
+            fs.writeFileSync(file, content)
         } catch (error) {
             return new Error(error)
         }
@@ -46,7 +48,7 @@ class FileSystem {
         }
     }
 
-    static fileDirExists (path) {
+    static fileDirExists (file) {
         let directory = path.dirname(file)
         return fs.existsSync(directory)
     }
