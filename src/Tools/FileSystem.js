@@ -1,9 +1,14 @@
-const FileExistsError = require('./Errors/FileExistsError.js')
-const FileNotFoundError = require('./Errors/FileNotFoundError.js')
+const fs = require('fs')
+const FileExistsError = require('./../Errors/FileExistsError.js')
+const FileNotFoundError = require('./../Errors/FileNotFoundError.js')
 
 class FileSystem {
 
-    static putContent (path, content, recursive) {
+    static exists (file) {
+        return fs.existsSync(file)
+    }
+
+    static putContent (path, content, recursive = false) {
         if(this.exists(path)) {
             return new FileExistsError('File exists')
         }
@@ -21,10 +26,6 @@ class FileSystem {
         return true
     }
 
-    static exists (file) {
-        return fs.existsSync(file)
-    }
-
     static getContent (file) {
         if(! this.exists(file)) {
             return new FileNotFoundError
@@ -34,6 +35,14 @@ class FileSystem {
             return fs.readFileSync(file, 'utf8')
         } catch (error) {
             return new Error(error)
+        }
+    }
+
+    static deleteFile (file) {
+        try {
+            fs.unlinkSync(file)
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -53,5 +62,6 @@ class FileSystem {
             }
         }
     }
-
 }
+
+module.exports = FileSystem
