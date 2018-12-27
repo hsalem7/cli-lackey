@@ -37,6 +37,9 @@ class App {
                 input.setArgs(args)
                 input.setOptions(options)
 
+                // TODO: check for required args
+                // then throw exceptions when not found
+
                 this.commands[command].input = input
                 this.commands[command].handle()
             })
@@ -55,9 +58,6 @@ class App {
         command.input = input
         command.handle()
     }
-
-
-
 }
 
 module.exports = App
