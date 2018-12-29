@@ -12,7 +12,7 @@ class FileSystem {
 
     static putContent (file, content, recursive = false) {
         if(this.exists(file)) {
-            return new FileExistsError('File exists')
+            throw new FileExistsError('File exists')
         }
 
         try {
@@ -22,7 +22,7 @@ class FileSystem {
 
             fs.writeFileSync(file, content)
         } catch (error) {
-            return new Error(error)
+            throw new Error(error)
         }
 
         return true
@@ -30,13 +30,13 @@ class FileSystem {
 
     static getContent (file) {
         if(! this.exists(file)) {
-            return new FileNotFoundError
+            throw new FileNotFoundError
         }
 
         try {
             return fs.readFileSync(file, 'utf8')
         } catch (error) {
-            return new Error(error)
+            throw new Error(error)
         }
     }
 
