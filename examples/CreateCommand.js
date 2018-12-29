@@ -4,7 +4,12 @@ class CreateCommand extends GeneratorCommand {
 
     config () {
         return {
-            signature: 'create:command {name} {--dir}'
+            signature: 'create:command {name} {--dir!}',
+            help: {
+                dir: 'Directory of the file'
+            },
+            description: 'Creates a command file',
+            alias: 'c:c'
         }
     } 
 
