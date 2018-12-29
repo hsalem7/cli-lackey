@@ -27,15 +27,26 @@ class App {
 
     init () {
         for(let command in this.commands) {
-           let appCommand = this.commander.command(this.commands[command].name + ' ' + this.buildArgs(this.commands[command]))
-            for(let option of this.commands[command].options) {
-                appCommand.option('--' + option + ' <' + option + '>')
+           let appCommand = this.commander.command(
+               this.commands[command].name + ' ' + this.buildArgs(this.commands[command])
+           )
+
+            appCommand.description(this.commands[command].getDescription())
+
+            if(this.commands[command].getAlias() != null) {
+                appCommand.alias(this.commands[command].getAlias())
+            }
+
+            for(let option of this.commands[command].getOptionsKeys()) {
+                appCommand.option('--' + option + ' <' + option + '>', this.commands[command].getHelp(option))
             }
 
             appCommand.action((args, options) => {
-                let input = new Input(this.commands[command].args)
-                input.setArgs(args)
-                input.setOptions(options)
+                let input = new Input(this.commands[command])
+                input.setArgsValues(args)
+                input.setOptionsValues(options)
+                input.validateArgs()
+                input.validateOptions()
 
                 // TODO: check for required args
                 // then throw exceptions when not found
