@@ -43,9 +43,7 @@ class GeneratorCommand extends Command {
             this.info(path + ' created successfuly')
             this.info("##########################\n")
         } catch (error) {
-            if(typeof error === typeof FileExistsError) {
-                this.error('File exists')
-            }
+            this.error(error)
         }
     }
 }
