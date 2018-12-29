@@ -3,24 +3,54 @@ const Parser = require('./../src/Tools/Parser.js')
 
 class Command {
 
-    constructor (logger = null, parser = null) {
+    constructor (logger = null) {
         this.logger = logger || Log
-        this.parser = parser || Parser
         this.init()
     }
 
     init () {
         let parser = new Parser()
         parser.parse(this.getSignature())
-
-        this.name = parser.getName()
-        this.args = parser.getArgs()
-        this.optionalArgs = parser.getOptionalArgs()
-        this.options = parser.getOptions()
+        this.parser = parser
+        this.name = this.getName()
     }
 
     getSignature () {
         return this.config().signature
+    }
+
+    getName () {
+        return this.parser.getName()
+    }
+
+    getArgsKeys () {
+        return this.parser.getArgs()
+    }
+
+    getOptionsKeys () {
+        return this.parser.getOptions()
+    }
+
+    getRequiredOptions () {
+        return this.parser.getRequiredOptions()
+    }
+
+    getOptionalArgs () {
+        return this.parser.getOptionalArgs()
+    }
+
+    getHelp (arg) {
+        if(!! this.config().help) {
+            return this.config().help[arg] || ''
+        }
+    }
+
+    getDescription () {
+        return this.config().description || ''
+    }
+
+    getAlias () {
+        return this.config().alias || null
     }
 
     info (...message) {
