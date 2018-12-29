@@ -1,0 +1,15 @@
+const {Command} = require('cli-lackey')
+
+class <commandName> extends Command {
+
+    config () {
+        return {
+            signature: 'signature'
+        }
+    } 
+
+    handle () {
+    }
+}
+
+module.exports = <commandName>
