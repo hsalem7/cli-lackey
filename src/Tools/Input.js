@@ -1,14 +1,55 @@
+const MissingRequiredArgError = require('./../Errors/MissingRequiredArgError.js')
+const MissingRequiredOptionError = require('./../Errors/MissingRequiredOptionError.js')
+
 class Input {
 
-    constructor (argsKeys) {
-        this.argsKeys = argsKeys
+    constructor (command) {
+        this.command = command
+        this.argsKeys = command.getArgsKeys()
+        this.optionsKeys = command.getOptionsKeys()
         this.args = {}
+
+        this.optionalArgs = []
+        this.requiredOptions = []
     }
 
-    setArgs (args) {
-        for(let arg in args) {
-            this.args[this.argsKeys[arg]] = args[arg]
+    setArgsValues (argsValues) {
+        for(let arg in argsValues) {
+            this.args[this.argsKeys[arg]] = argsValues[arg]
         }
+    }
+
+    setOptionsValues (options) {
+        this.options = options
+    }
+
+    validateArgs () {
+        for(let arg of this.argsKeys) {
+            if(! this.hasArg(arg) && ! this.isOptionalArg(arg)) {
+                throw new MissingRequiredArgError(`Missing required argument '${arg}'`)
+            }
+        }
+
+        return true
+    }
+
+    validateOptions () {
+        for(let option of this.optionsKeys) {
+            if(! this.hasOption(option) && this.isRequiredOption(option)) {
+                throw new MissingRequiredOptionError(`Missing required option '${option}'`)
+            }
+        }
+
+        return true
+
+    }
+
+    isOptionalArg (arg) {
+        return this.command.getOptionalArgs().indexOf(arg) >= 0
+    }
+
+    isRequiredOption (option) {
+        return this.command.getRequiredOptions().indexOf(option) >= 0
     }
 
     hasArg (key) {
@@ -25,10 +66,6 @@ class Input {
         }
 
         return null
-    }
-
-    setOptions(options) {
-        this.options = options
     }
 
     getOption (key) {
