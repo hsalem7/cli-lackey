@@ -1,35 +1,35 @@
 class Parser {
 
+    reset () {
+        this.args = []
+        this.options = []
+        this.requiredOptions = []
+        this.optionalArgs = []
+    }
+
     parse (input) {
+        this.reset()
+
         this.input = input
         this.matches = input.match(/\{\s*(.*?)\s*\}/g) || []
+        this.parseArgs(this.matches)
 
-        this.args = this.parseArgs(this.matches).args
-        this.options = this.parseArgs(this.matches).options
-        this.optionalArgs = this.parseArgs(this.matches).optionalArgs
+        return this
     }
 
     parseArgs (matches) {
-        let args = []
-        let options = []
-        let optionalArgs = []
-
         for(let arg of matches) {
             if(this.isOption(arg)) {
-                options.push(this.cleanStr(arg))
-            } else {
-                if(this.isOptional(arg)) {
-                    optionalArgs.push(this.cleanStr(arg))
-                } else {
-                    args.push(this.cleanStr(arg))
+                if(this.isRequiredOption(arg)) {
+                    this.requiredOptions.push(this.cleanStr(arg))
                 }
+                this.options.push(this.cleanStr(arg))
+            } else {
+                if(this.isOptionalArg(arg)) {
+                    this.optionalArgs.push(this.cleanStr(arg))
+                }
+                this.args.push(this.cleanStr(arg))
             }
-        }
-
-        return {
-            args: args,
-            optionalArgs: optionalArgs,
-            options: options
         }
     }
 
@@ -49,7 +49,11 @@ class Parser {
         return this.options
     }
 
-    isOptional (arg) {
+    getRequiredOptions () {
+        return this.requiredOptions
+    }
+
+    isOptionalArg (arg) {
         return arg.indexOf('?') > 0
     }
 
@@ -57,9 +61,17 @@ class Parser {
         return arg.indexOf('--') >= 0
     }
 
+    isRequiredOption (arg) {
+        return arg.indexOf('!') >= 0
+    }
+
     // should be cleaner
     cleanStr (str) {
-        return str.replace('{', '').replace('}', '').replace('--', '').replace('?', '')
+        return str.replace('{', '').
+            replace('}', '').
+            replace('--', '').
+            replace('?', '').
+            replace('!', '').trim()
     }
 }
 
