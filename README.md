@@ -94,12 +94,14 @@ we will have a file with this content:
 **Config function**
 
 config function should return an object with:
-|config key|config value |
-|--|--|
-| signature | [required] the signature of the command as `command-name {arg1} {arg2} {--option1}` |
-|help|[optional] Is an object that define every option as `{dir: 'Directory to save...'}`|
-|description|[optional] Description of the command itselfe|
-|alias|[optional] Alias to call the command with |
+
+| config key  | config value |
+| ------------- | ------------- |
+| signature [required] |  the signature of the command as `command-name {arg1} {arg2} {--option1}`  |
+| help [optional] |  Is an object that define every option as `{dir: 'Directory to save...'}`  |
+| description  [optional]|  Description of the command itself  |
+| alias  [optional]|  Alias to call the command with  |
+
 
 example of the command generator command:
 
