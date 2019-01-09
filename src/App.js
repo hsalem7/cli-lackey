@@ -63,7 +63,7 @@ class App {
     }
 
     static call (command, args, options) {
-        let input = new Input(command.args)
+        let input = new Input(command.getArgsKeys())
         input.setArgs(args)
         input.setOptions(options)
         command.input = input
