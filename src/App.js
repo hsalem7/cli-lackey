@@ -63,9 +63,9 @@ class App {
     }
 
     static call (command, args, options) {
-        let input = new Input(command.getArgsKeys())
-        input.setArgs(args)
-        input.setOptions(options)
+        let input = new Input(command)
+        input.setOptionsValues(options)
+        input.setArgsValues(args)
         command.input = input
         command.handle()
     }
