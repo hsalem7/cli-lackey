@@ -1,6 +1,6 @@
 {
   "name": "cli-lackey",
-  "version": "1.0.2",
+  "version": "1.1.3",
   "description": "A command line helper package",
   "main": "index.js",
   "scripts": {
